@@ -17,11 +17,11 @@ public abstract class Entity
     public float VelocityY { get; set; }
 
     // Animation
-    protected string[][] Frames { get; set; } = Array.Empty<string[]>();
-    protected string[][] ColorMasks { get; set; } = Array.Empty<string[]>();
+    public string[][] Frames { get; set; } = Array.Empty<string[]>();
+    public string[][] ColorMasks { get; set; } = Array.Empty<string[]>();
     protected int CurrentFrameIndex { get; set; } = 0;
     protected float FrameTimer { get; set; } = 0;
-    protected float FrameRate { get; set; } = 0.25f; // Time between frames in seconds
+    public float FrameRate { get; set; } = 0.25f; // Time between frames in seconds
 
     // Rendering
     public ConsoleColor DefaultColor { get; set; } = ConsoleColor.White;

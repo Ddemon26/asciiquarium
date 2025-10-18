@@ -6,6 +6,15 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+    <EnableDefaultCompileItems>true</EnableDefaultCompileItems>
   </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Explicitly exclude the asciiquarium.Cli subdirectory -->
+    <Compile Remove="asciiquarium.Cli\**" />
+    <EmbeddedResource Remove="asciiquarium.Cli\**" />
+    <None Remove="asciiquarium.Cli\**" />
+  </ItemGroup>
 
 </Project>

@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "asciiquarium.Cli", "asciiquarium.Cli\asciiquarium.Cli.csproj", "{9C501B04-D225-4BA4-82BC-4FFE4CBD1FC4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Asciiquarium.Core", "Asciiquarium.Core\Asciiquarium.Core.csproj", "{C6323750-52A5-408A-B315-103C50F6649E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,18 @@ Global
 		{9C501B04-D225-4BA4-82BC-4FFE4CBD1FC4}.Release|x64.Build.0 = Release|Any CPU
 		{9C501B04-D225-4BA4-82BC-4FFE4CBD1FC4}.Release|x86.ActiveCfg = Release|Any CPU
 		{9C501B04-D225-4BA4-82BC-4FFE4CBD1FC4}.Release|x86.Build.0 = Release|Any CPU
+		{C6323750-52A5-408A-B315-103C50F6649E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6323750-52A5-408A-B315-103C50F6649E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6323750-52A5-408A-B315-103C50F6649E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{C6323750-52A5-408A-B315-103C50F6649E}.Debug|x64.Build.0 = Debug|Any CPU
+		{C6323750-52A5-408A-B315-103C50F6649E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C6323750-52A5-408A-B315-103C50F6649E}.Debug|x86.Build.0 = Debug|Any CPU
+		{C6323750-52A5-408A-B315-103C50F6649E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6323750-52A5-408A-B315-103C50F6649E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6323750-52A5-408A-B315-103C50F6649E}.Release|x64.ActiveCfg = Release|Any CPU
+		{C6323750-52A5-408A-B315-103C50F6649E}.Release|x64.Build.0 = Release|Any CPU
+		{C6323750-52A5-408A-B315-103C50F6649E}.Release|x86.ActiveCfg = Release|Any CPU
+		{C6323750-52A5-408A-B315-103C50F6649E}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

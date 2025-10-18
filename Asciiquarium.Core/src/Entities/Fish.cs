@@ -1,18 +1,15 @@
-using Asciiquarium.Core;
-using Asciiquarium.Rendering;
-
-namespace Asciiquarium.Entities;
+using Asciiquarium.Core.Core;
+using Asciiquarium.Core.Rendering;
+namespace Asciiquarium.Core.Entities;
 
 /// <summary>
-/// Fish entities with multiple types and colors
+///     Fish entities with multiple types and colors
 /// </summary>
-public class Fish : Entity
-{
-    private static readonly Random _random = new();
+public class Fish : Entity {
+    static readonly Random _random = new();
 
     // Fish designs with their right-facing and left-facing frames
-    private static readonly (string[] right, string[] rightMask, string[] left, string[] leftMask)[] FishTypes = new[]
-    {
+    static readonly (string[] right, string[] rightMask, string[] left, string[] leftMask)[] FishTypes = new[] {
         // Small fish 1
         (
             new[] { "   \\", "  / \\", ">=_('", ">", "  \\_/", "   /" },
@@ -54,50 +51,46 @@ public class Fish : Entity
             new[] { "   1121", "661   745", "  111311" },
             new[] { "  ,..", "<')   `=<", " ``\\```" },
             new[] { "  1211", "547   166", " 113111" }
-        )
+        ),
     };
 
-    public static void AddFish(AnimationEngine engine, Entity? oldFish = null)
-    {
+    public static void AddFish(AnimationEngine engine, Entity? oldFish = null) {
         // Choose random fish type
-        int fishTypeIndex = _random.Next(FishTypes.Length);
-        var (rightFrame, rightMask, leftFrame, leftMask) = FishTypes[fishTypeIndex];
+        int fishTypeIndex = _random.Next( FishTypes.Length );
+        (string[] rightFrame, string[] rightMask, string[] leftFrame, string[] leftMask) = FishTypes[fishTypeIndex];
 
         // Determine direction (left or right)
-        bool goingRight = _random.Next(2) == 0;
-        float speed = (float)(_random.NextDouble() * 2 + 0.25);
+        bool goingRight = _random.Next( 2 ) == 0;
+        var speed = (float)(_random.NextDouble() * 2 + 0.25);
 
         string[] frame;
         string[] mask;
 
-        if (goingRight)
-        {
+        if ( goingRight ) {
             frame = rightFrame;
             mask = rightMask;
         }
-        else
-        {
+        else {
             frame = leftFrame;
             mask = leftMask;
             speed = -speed;
         }
 
         // Apply random colors to the mask (replace numbers with color codes)
-        string[] colorMask = ColorConsole.ApplyRandomColors(mask);
+        string[] colorMask = ColorConsole.ApplyRandomColors( mask );
 
         // Random depth for fish layering
-        int depth = _random.Next(3, 21); // Between fish_start and fish_end
+        int depth = _random.Next( 3, 21 ); // Between fish_start and fish_end
 
         // Random Y position (below water, above bottom)
-        int minY = 9;
+        var minY = 9;
         int maxY = engine.Height - frame.Length - 1;
-        int y = _random.Next(minY, Math.Max(minY + 1, maxY));
+        int y = _random.Next( minY, Math.Max( minY + 1, maxY ) );
 
         // Start position based on direction
-        int x = goingRight ? -GetMaxLineLength(frame) : engine.Width;
+        int x = goingRight ? -GetMaxLineLength( frame ) : engine.Width;
 
-        var fish = new Fish
-        {
+        var fish = new Fish {
             X = x,
             Y = y,
             Depth = depth,
@@ -108,49 +101,42 @@ public class Fish : Entity
             Frames = new[] { frame },
             ColorMasks = new[] { colorMask },
             DefaultColor = ConsoleColor.Yellow,
-            DeathCallback = (entity) => AddFish(engine, entity)
+            DeathCallback = entity => AddFish( engine, entity ),
         };
 
-        engine.AddEntity(fish);
+        engine.AddEntity( fish );
     }
 
-    public static void AddAllFish(AnimationEngine engine)
-    {
+    public static void AddAllFish(AnimationEngine engine) {
         // Figure out how many fish to add by screen size
         int screenSize = (engine.Height - 9) * engine.Width;
         int fishCount = screenSize / 350;
 
-        for (int i = 0; i < fishCount; i++)
-        {
-            AddFish(engine);
+        for (var i = 0; i < fishCount; i++) {
+            AddFish( engine );
         }
     }
 
-    protected override void OnUpdate(float deltaTime, int screenWidth, int screenHeight)
-    {
+    protected override void OnUpdate(float deltaTime, int screenWidth, int screenHeight) {
         // Randomly generate bubbles
-        if (_random.Next(100) > 97)
-        {
+        if ( _random.Next( 100 ) > 97 ) {
             // Need access to engine to add bubble - we'll handle this via a callback pattern
             // For now, skip bubble generation in this method
         }
     }
 
-    public override void OnCollision(Entity other)
-    {
+    public override void OnCollision(Entity other) {
         // Fish can be eaten by shark teeth
-        if (other.Type == "teeth")
-        {
-            var (_, height) = GetSize();
-            if (height <= 5) // Only small fish get eaten
+        if ( other.Type == "teeth" ) {
+            (_, int height) = GetSize();
+            if ( height <= 5 ) // Only small fish get eaten
             {
                 Kill();
             }
         }
     }
 
-    private static int GetMaxLineLength(string[] lines)
-    {
-        return lines.Length > 0 ? lines.Max(line => line.Length) : 0;
+    static int GetMaxLineLength(string[] lines) {
+        return lines.Length > 0 ? lines.Max( line => line.Length ) : 0;
     }
 }
